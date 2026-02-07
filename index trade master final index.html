@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trade Masters USA — CRM para Contratistas HVAC, Refrigeración y Electricidad</title>
+    <meta name="description" content="El sistema #1 para contratistas HVAC, refrigeración y electricidad. Despacho GPS, facturación, estimados, nómina y más. Gratis para empezar.">
+    <meta name="keywords" content="HVAC CRM, contractor software, field service management, despacho GPS, facturación HVAC, Trade Master">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --navy-light: #111d35;
+            --blue: #1e6bff;
+            --blue-glow: #3d7eff;
+            --orange: #ff6b2c;
+            --orange-glow: #ff8a55;
+            --white: #ffffff;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-400: #94a3b8;
+            --gray-600: #475569;
+            --gradient-hero: linear-gradient(135deg, #0a1628 0%, #0f2645 40%, #132d4f 100%);
+            --gradient-cta: linear-gradient(135deg, #ff6b2c, #ff8a55);
+            --gradient-blue: linear-gradient(135deg, #1e6bff, #3d7eff);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--white);
+            background: var(--navy);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NOISE TEXTURE OVERLAY ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 22, 40, 0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s ease;
+        }
+        nav.scrolled { background: rgba(10, 22, 40, 0.95); padding: 14px 40px; }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        .nav-logo-icon {
+            width: 42px; height: 42px;
+            background: var(--navy-light);
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(255,107,44,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-logo-icon .logo-flame { color: #ff6b2c; font-size: 22px; position: relative; z-index: 2; margin-left: -3px; }
+        .nav-logo-icon .logo-snow { color: #3d9df5; font-size: 18px; position: relative; z-index: 2; margin-right: -3px; }
+        .nav-logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: var(--white);
+            letter-spacing: -0.5px;
+        }
+        .nav-logo-text span { color: var(--orange); }
+
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gray-400);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+            letter-spacing: 0.3px;
+        }
+        .nav-links a:hover { color: var(--white); }
+
+        .nav-cta {
+            display: flex; gap: 12px; align-items: center;
+        }
+        .btn-ghost {
+            padding: 10px 24px;
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 8px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            background: transparent;
+        }
+        .btn-ghost:hover { border-color: var(--blue); background: rgba(30,107,255,0.1); }
+
+        .btn-primary {
+            padding: 10px 24px;
+            background: var(--gradient-cta);
+            border-radius: 8px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(255,107,44,0.3);
+            border: none; cursor: pointer;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,44,0.4); }
+
+        .btn-blue {
+            padding: 14px 32px;
+            background: var(--gradient-blue);
+            border-radius: 10px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(30,107,255,0.3);
+            display: inline-flex; align-items: center; gap: 8px;
+            border: none; cursor: pointer;
+        }
+        .btn-blue:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(30,107,255,0.4); }
+
+        .btn-large {
+            padding: 18px 44px;
+            font-size: 17px;
+            border-radius: 12px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-hero);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 40px 80px;
+        }
+
+        /* Animated grid background */
+        .hero-grid {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image:
+                linear-gradient(rgba(30,107,255,0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30,107,255,0.06) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: gridMove 20s linear infinite;
+        }
+        @keyframes gridMove { to { background-position: 80px 80px; } }
+
+        /* Glow orbs */
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+        .hero-orb-1 { width: 500px; height: 500px; background: var(--blue); top: -10%; right: -5%; animation-delay: 0s; }
+        .hero-orb-2 { width: 300px; height: 300px; background: var(--orange); bottom: 10%; left: -5%; animation-delay: 3s; }
+        .hero-orb-3 { width: 200px; height: 200px; background: var(--blue-glow); top: 40%; left: 30%; animation-delay: 5s; opacity: 0.2; }
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        .hero-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,107,44,0.12);
+            border: 1px solid rgba(255,107,44,0.25);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--orange);
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+        .hero h1 .highlight {
+            background: var(--gradient-cta);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 18px;
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 36px;
+            max-width: 520px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            animation: fadeInUp 0.8s ease 0.3s both;
+            flex-wrap: wrap;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 48px;
+            animation: fadeInUp 0.8s ease 0.4s both;
+        }
+        .hero-stat-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--white);
+        }
+        .hero-stat-num span { color: var(--orange); }
+        .hero-stat-label { font-size: 13px; color: var(--gray-400); margin-top: 4px; letter-spacing: 0.5px; }
+
+        .hero-visual {
+            position: relative;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        .hero-mockup {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .hero-mockup-glow {
+            position: absolute;
+            top: -20%; left: -20%; right: -20%; bottom: -20%;
+            background: radial-gradient(ellipse at center, rgba(30,107,255,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Floating feature cards on hero visual */
+        .hero-float {
+            position: absolute;
+            background: rgba(17, 29, 53, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: floatCard 4s ease-in-out infinite;
+        }
+        .hero-float-icon {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px;
+        }
+        .hero-float-1 { top: 10%; right: -30px; animation-delay: 0s; }
+        .hero-float-1 .hero-float-icon { background: rgba(16,185,129,0.2); }
+        .hero-float-2 { bottom: 20%; left: -40px; animation-delay: 2s; }
+        .hero-float-2 .hero-float-icon { background: rgba(255,107,44,0.2); }
+        .hero-float-3 { bottom: 5%; right: 10%; animation-delay: 1s; }
+        .hero-float-3 .hero-float-icon { background: rgba(30,107,255,0.2); }
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== LOGOS BAR ===== */
+        .logos {
+            padding: 60px 40px;
+            background: var(--navy-light);
+            border-top: 1px solid rgba(255,255,255,0.04);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .logos-inner {
+            max-width: 1280px; margin: 0 auto; text-align: center;
+        }
+        .logos-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gray-400);
+            margin-bottom: 28px;
+            font-weight: 600;
+        }
+        .logos-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+            opacity: 0.5;
+        }
+        .logos-row span {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--gray-400);
+            letter-spacing: 1px;
+        }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 120px 40px; }
+
+        .section-inner { max-width: 1280px; margin: 0 auto; }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--blue);
+            margin-bottom: 16px;
+        }
+        .section-label::before {
+            content: '';
+            width: 24px; height: 2px;
+            background: var(--blue);
+        }
+
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .section-sub {
+            font-size: 17px;
+            color: var(--gray-400);
+            line-height: 1.7;
+            max-width: 600px;
+        }
+
+        /* ===== FEATURES ===== */
+        .features { background: var(--navy); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+        }
+        .feature-card {
+            background: var(--navy-light);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 36px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--gradient-cta);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .feature-card:hover { border-color: rgba(255,107,44,0.2); transform: translateY(-4px); }
+        .feature-card:hover::before { opacity: 1; }
+        .feature-icon {
+            width: 52px; height: 52px;
+            border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            background: rgba(30,107,255,0.1);
+        }
+        .feature-card:nth-child(2) .feature-icon { background: rgba(255,107,44,0.1); }
+        .feature-card:nth-child(3) .feature-icon { background: rgba(16,185,129,0.1); }
+        .feature-card:nth-child(4) .feature-icon { background: rgba(139,92,246,0.1); }
+        .feature-card:nth-child(5) .feature-icon { background: rgba(245,158,11,0.1); }
+        .feature-card:nth-child(6) .feature-icon { background: rgba(236,72,153,0.1); }
+        .feature-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: var(--gray-400);
+            line-height: 1.7;
+        }
+
+        /* ===== TRINIDAD ===== */
+        .trinidad {
+            background: var(--navy-light);
+            position: relative;
+            overflow: hidden;
+        }
+        .trinidad-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 64px;
+        }
+        .trinidad-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .trinidad-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+        .trinidad-card:hover { border-color: rgba(255,107,44,0.3); background: rgba(255,107,44,0.04); }
+        .trinidad-card-icon {
+            width: 60px; height: 60px;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        .trinidad-card:nth-child(1) .trinidad-card-icon { background: linear-gradient(135deg, rgba(30,107,255,0.2), rgba(30,107,255,0.05)); }
+        .trinidad-card:nth-child(2) .trinidad-card-icon { background: linear-gradient(135deg, rgba(255,107,44,0.2), rgba(255,107,44,0.05)); }
+        .trinidad-card:nth-child(3) .trinidad-card-icon { background: linear-gradient(135deg, rgba(16,185,129,0.2), rgba(16,185,129,0.05)); }
+        .trinidad-card h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .trinidad-card p { font-size: 14px; color: var(--gray-400); line-height: 1.5; }
+
+        .trinidad-visual {
+            text-align: center;
+        }
+        .trinidad-circle {
+            width: 320px; height: 320px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,107,44,0.15) 0%, transparent 70%);
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+        }
+        .trinidad-center {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.2;
+        }
+        .trinidad-center small { display: block; font-size: 14px; color: var(--gray-400); font-weight: 400; margin-top: 4px; }
+        .trinidad-orbit {
+            position: absolute;
+            width: 100%; height: 100%;
+            border: 1px dashed rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: spin 30s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .trinidad-dot {
+            position: absolute;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px;
+            background: var(--navy-light);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+        }
+        .trinidad-dot:nth-child(1) { top: -24px; left: 50%; transform: translateX(-50%); }
+        .trinidad-dot:nth-child(2) { bottom: 10%; right: -24px; }
+        .trinidad-dot:nth-child(3) { bottom: 10%; left: -24px; }
+
+        /* ===== PRICING ===== */
+        .pricing { background: var(--navy); text-align: center; }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 64px;
+            max-width: 1000px;
+            margin-left: auto; margin-right: auto;
+        }
+        .price-card {
+            background: var(--navy-light);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 40px 32px;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .price-card.popular {
+            border-color: var(--orange);
+            background: linear-gradient(180deg, rgba(255,107,44,0.08) 0%, var(--navy-light) 50%);
+            transform: scale(1.05);
+        }
+        .price-card.popular::before {
+            content: '⭐ Más Popular';
+            position: absolute;
+            top: -14px; left: 50%; transform: translateX(-50%);
+            background: var(--gradient-cta);
+            padding: 6px 20px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+        .price-card:hover { transform: translateY(-4px); }
+        .price-card.popular:hover { transform: scale(1.05) translateY(-4px); }
+
+        .price-name { font-family: 'Outfit', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+        .price-desc { font-size: 14px; color: var(--gray-400); margin-bottom: 24px; line-height: 1.5; }
+        .price-amount {
+            font-family: 'Outfit', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+        .price-amount span { font-size: 18px; color: var(--gray-400); font-weight: 400; }
+        .price-period { font-size: 13px; color: var(--gray-400); margin-bottom: 28px; }
+        .price-features { list-style: none; margin-bottom: 32px; }
+        .price-features li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--gray-200);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .price-features li::before { content: '✓'; color: var(--orange); font-weight: 700; }
+        .price-btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        .price-btn-ghost {
+            border: 1px solid rgba(255,255,255,0.15);
+            color: var(--white);
+            background: transparent;
+        }
+        .price-btn-ghost:hover { border-color: var(--blue); background: rgba(30,107,255,0.1); }
+        .price-btn-fill {
+            background: var(--gradient-cta);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 4px 20px rgba(255,107,44,0.3);
+        }
+        .price-btn-fill:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(255,107,44,0.4); }
+
+        /* ===== TESTIMONIAL ===== */
+        .testimonial {
+            background: var(--navy-light);
+            text-align: center;
+        }
+        .testimonial-card {
+            max-width: 700px;
+            margin: 48px auto 0;
+            padding: 48px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+        }
+        .testimonial-text {
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--gray-200);
+            font-style: italic;
+            margin-bottom: 24px;
+        }
+        .testimonial-author { font-weight: 700; font-size: 16px; }
+        .testimonial-role { font-size: 13px; color: var(--gray-400); margin-top: 4px; }
+
+        /* ===== CTA ===== */
+        .cta {
+            background: var(--navy);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-glow {
+            position: absolute;
+            width: 600px; height: 400px;
+            background: radial-gradient(ellipse, rgba(255,107,44,0.12) 0%, transparent 70%);
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+        .cta .section-title { max-width: 700px; margin: 0 auto 20px; }
+        .cta .section-sub { max-width: 500px; margin: 0 auto 40px; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--navy-light);
+            padding: 60px 40px 30px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+        }
+        .footer-brand p { font-size: 14px; color: var(--gray-400); line-height: 1.7; margin-top: 16px; max-width: 300px; }
+        .footer-col h5 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            color: var(--gray-200);
+        }
+        .footer-col a {
+            display: block;
+            font-size: 14px;
+            color: var(--gray-400);
+            text-decoration: none;
+            padding: 4px 0;
+            transition: color 0.2s;
+        }
+        .footer-col a:hover { color: var(--white); }
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 40px auto 0;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+        .footer-social { display: flex; gap: 16px; }
+        .footer-social a { color: var(--gray-400); font-size: 18px; text-decoration: none; transition: color 0.2s; }
+        .footer-social a:hover { color: var(--orange); }
+
+        /* ===== MOBILE ===== */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
+
+        @media (max-width: 900px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .nav-cta .btn-ghost { display: none; }
+            .mobile-menu-btn { display: block; }
+
+            section { padding: 80px 20px; }
+            .hero { padding: 100px 20px 60px; }
+            .hero-content { grid-template-columns: 1fr; gap: 40px; }
+            .hero-visual { display: none; }
+            .hero-stats { gap: 24px; }
+            .hero-stat-num { font-size: 28px; }
+
+            .features-grid { grid-template-columns: 1fr; }
+            .trinidad-grid { grid-template-columns: 1fr; gap: 40px; }
+            .trinidad-visual { order: -1; }
+            .trinidad-circle { width: 240px; height: 240px; }
+
+            .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+            .price-card.popular { transform: none; }
+            .price-card.popular:hover { transform: translateY(-4px); }
+
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">
+        <div class="nav-logo-icon"><span class="logo-snow">❄️</span><span class="logo-flame">🔥</span></div>
+        <div class="nav-logo-text">Trade<span>Masters</span></div>
+    </a>
+    <div class="nav-links">
+        <a href="#features">Funciones</a>
+        <a href="#trinidad">La Trinidad</a>
+        <a href="#pricing">Precios</a>
+    </div>
+    <div class="nav-cta">
+        <a href="https://acvolttech.github.io/trademaster-crm/" class="btn-ghost">Iniciar Sesión</a>
+        <a href="https://acvolttech.github.io/trademaster-crm/" class="btn-primary">Empezar Gratis</a>
+        <button class="mobile-menu-btn" onclick="document.querySelector('.nav-links').style.display=document.querySelector('.nav-links').style.display==='flex'?'none':'flex'">☰</button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+
+    <div class="hero-content">
+        <div>
+            <div class="hero-badge">🚀 La plataforma #1 para contratistas</div>
+            <h1>Administra tu negocio <span class="highlight">como un profesional</span></h1>
+            <p class="hero-sub">CRM completo para contratistas de HVAC, refrigeración y electricidad. Despacho GPS, facturación, estimados, nómina y 150+ funciones en un solo lugar.</p>
+            <div class="hero-buttons">
+                <a href="https://acvolttech.github.io/trademaster-crm/" class="btn-primary btn-large">Crear Cuenta Gratis →</a>
+                <a href="#features" class="btn-ghost btn-large">Ver Funciones</a>
+            </div>
+            <div class="hero-stats">
+                <div>
+                    <div class="hero-stat-num">640K<span>+</span></div>
+                    <div class="hero-stat-label">COMUNIDAD</div>
+                </div>
+                <div>
+                    <div class="hero-stat-num">150<span>+</span></div>
+                    <div class="hero-stat-label">FUNCIONES</div>
+                </div>
+                <div>
+                    <div class="hero-stat-num">9<span> tablas</span></div>
+                    <div class="hero-stat-label">EN LA NUBE</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="hero-mockup-glow"></div>
+            <img src="https://acvolttech.github.io/trademaster-crm/screenshot.png"
+                 alt="Trade Master CRM Dashboard"
+                 class="hero-mockup"
+                 onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'width:100%;aspect-ratio:16/10;background:linear-gradient(135deg,var(--navy-light),#1a2d4a);border-radius:16px;border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:64px;\'><span style=\"font-size:48px\">❄️🔥</span></div>'"
+            >
+            <div class="hero-float hero-float-1">
+                <div class="hero-float-icon">📍</div>
+                <div>GPS Dispatch<br><small style="color:var(--gray-400);font-weight:400;">En tiempo real</small></div>
+            </div>
+            <div class="hero-float hero-float-2">
+                <div class="hero-float-icon">💰</div>
+                <div>$2,996<br><small style="color:#10b981;font-weight:400;">+12% este mes</small></div>
+            </div>
+            <div class="hero-float hero-float-3">
+                <div class="hero-float-icon">📊</div>
+                <div>150+ Partes<br><small style="color:var(--gray-400);font-weight:400;">Catálogo HVAC</small></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos">
+    <div class="logos-inner">
+        <div class="logos-label">Compatible con las herramientas que ya usas</div>
+        <div class="logos-row">
+            <span>QuickBooks</span>
+            <span>Google Maps</span>
+            <span>ADP</span>
+            <span>Gusto</span>
+            <span>Square</span>
+            <span>Home Advisors</span>
+        </div>
+    </div>
+</div>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+    <div class="section-inner">
+        <div class="section-label reveal">Funciones</div>
+        <h2 class="section-title reveal">Todo lo que necesitas<br>para crecer tu negocio</h2>
+        <p class="section-sub reveal">Desde el primer lead hasta el cobro final. Trade Master maneja todo tu flujo de operaciones.</p>
+
+        <div class="features-grid">
+            <div class="feature-card reveal">
+                <div class="feature-icon">📍</div>
+                <h3>Despacho GPS</h3>
+                <p>Mapa en tiempo real con ubicación de técnicos, asignación de trabajos y optimización de rutas automática.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">💰</div>
+                <h3>Facturación Pro</h3>
+                <p>Crea facturas profesionales, cobra en línea, envía recordatorios automáticos y lleva control de pagos parciales.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">📋</div>
+                <h3>Estimados HVAC</h3>
+                <p>Catálogo de 150+ partes HVAC precargado. Genera presupuestos profesionales en minutos con tu marca.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">👥</div>
+                <h3>CRM de Clientes</h3>
+                <p>Perfiles completos, historial de trabajos, notas, documentos y comunicación — todo en un solo lugar.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">⏰</div>
+                <h3>Clock In / Out</h3>
+                <p>Control de jornadas con tarifa por hora, cálculo automático de ganancias y historial por empleado.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="feature-icon">📊</div>
+                <h3>Reportes y Finanzas</h3>
+                <p>Dashboard con ingresos, gastos, nómina, ROI de marketing y métricas clave para tomar decisiones.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TRINIDAD -->
+<section class="trinidad" id="trinidad">
+    <div class="section-inner">
+        <div class="trinidad-grid">
+            <div>
+                <div class="section-label reveal">Especializado</div>
+                <h2 class="section-title reveal">La Trinidad<br>del Oficio</h2>
+                <p class="section-sub reveal" style="margin-bottom:40px;">Trade Master fue creado específicamente para las 3 ramas del oficio. No es un CRM genérico — es TU herramienta.</p>
+
+                <div class="trinidad-cards">
+                    <div class="trinidad-card reveal">
+                        <div class="trinidad-card-icon">❄️</div>
+                        <div>
+                            <h4>HVAC / Aire Acondicionado</h4>
+                            <p>Diagnóstico, mantenimiento preventivo, instalaciones y reparaciones con catálogo completo.</p>
+                        </div>
+                    </div>
+                    <div class="trinidad-card reveal">
+                        <div class="trinidad-card-icon">🔥</div>
+                        <div>
+                            <h4>Refrigeración Comercial</h4>
+                            <p>Walk-in coolers, freezers, ice machines — contratos de mantenimiento y planes de servicio.</p>
+                        </div>
+                    </div>
+                    <div class="trinidad-card reveal">
+                        <div class="trinidad-card-icon">⚡</div>
+                        <div>
+                            <h4>Electricidad</h4>
+                            <p>Paneles, circuitos, instalaciones — control de permisos, licencias y cumplimiento de código.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="trinidad-visual reveal">
+                <div class="trinidad-circle">
+                    <div class="trinidad-orbit">
+                        <div class="trinidad-dot">❄️</div>
+                        <div class="trinidad-dot">🔥</div>
+                        <div class="trinidad-dot">⚡</div>
+                    </div>
+                    <div class="trinidad-center">
+                        La Trinidad<br>del Oficio
+                        <small>HVAC • Refrigeración • Electricidad</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+    <div class="section-inner">
+        <div class="section-label reveal">Precios</div>
+        <h2 class="section-title reveal">Empieza gratis,<br>crece sin límites</h2>
+        <p class="section-sub reveal" style="margin:0 auto;">Sin sorpresas. Sin contratos. Cancela cuando quieras.</p>
+
+        <div class="pricing-grid">
+            <div class="price-card reveal">
+                <div class="price-name">Starter</div>
+                <div class="price-desc">Para contratistas que empiezan a organizar su negocio.</div>
+                <div class="price-amount">$0 <span>/mes</span></div>
+                <div class="price-period">Gratis para siempre</div>
+                <ul class="price-features">
+                    <li>Hasta 5 clientes</li>
+                    <li>Hasta 5 leads</li>
+                    <li>Facturación básica</li>
+                    <li>Despacho GPS</li>
+                    <li>Catálogo HVAC</li>
+                </ul>
+                <a href="https://acvolttech.github.io/trademaster-crm/" class="price-btn price-btn-ghost">Empezar Gratis</a>
+            </div>
+
+            <div class="price-card popular reveal">
+                <div class="price-name">Profesional</div>
+                <div class="price-desc">Para empresas en crecimiento con hasta 100 clientes.</div>
+                <div class="price-amount">$149<span>.99/mes</span></div>
+                <div class="price-period">Facturado mensualmente</div>
+                <ul class="price-features">
+                    <li>Hasta 100 clientes</li>
+                    <li>Leads ilimitados</li>
+                    <li>Técnicos ilimitados</li>
+                    <li>Facturación avanzada</li>
+                    <li>Nómina + integraciones</li>
+                    <li>Reportes financieros</li>
+                    <li>Soporte prioritario</li>
+                </ul>
+                <a href="https://acvolttech.github.io/trademaster-crm/" class="price-btn price-btn-fill">Empezar Prueba Gratis</a>
+            </div>
+
+            <div class="price-card reveal">
+                <div class="price-name">Enterprise</div>
+                <div class="price-desc">Para empresas grandes con más de 100 clientes.</div>
+                <div class="price-amount">$299 <span>/mes</span></div>
+                <div class="price-period">Facturado mensualmente</div>
+                <ul class="price-features">
+                    <li>Todo de Profesional</li>
+                    <li>Clientes ilimitados</li>
+                    <li>Múltiples ubicaciones</li>
+                    <li>API personalizada</li>
+                    <li>Onboarding dedicado</li>
+                    <li>SLA garantizado</li>
+                </ul>
+                <a href="https://acvolttech.github.io/trademaster-crm/" class="price-btn price-btn-ghost">Contactar Ventas</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+    <div class="section-inner">
+        <div class="section-label reveal">Comunidad</div>
+        <h2 class="section-title reveal">Más de 640,000 personas<br>confían en nosotros</h2>
+
+        <div class="testimonial-card reveal">
+            <p class="testimonial-text">"Si no mides, estás adivinando. Trade Master me permite medir cada aspecto de mi negocio — desde los leads hasta el último cobro. Es la herramienta que todo contratista necesita."</p>
+            <div class="testimonial-author">Mario Flores Corona</div>
+            <div class="testimonial-role">Fundador — ACVOLT Tech School | Nivel 33</div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+    <div class="cta-glow"></div>
+    <div class="section-inner" style="position:relative;z-index:2;">
+        <h2 class="section-title reveal">¿Listo para llevar tu<br>negocio al <span style="color:var(--orange);">siguiente nivel</span>?</h2>
+        <p class="section-sub reveal">Únete a miles de contratistas que ya administran su negocio como profesionales con Trade Master.</p>
+        <div class="reveal">
+            <a href="https://acvolttech.github.io/trademaster-crm/" class="btn-primary btn-large" style="font-size:18px;padding:20px 48px;">Crear Mi Cuenta Gratis →</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon"><span class="logo-snow">❄️</span><span class="logo-flame">🔥</span></div>
+                <div class="nav-logo-text">Trade<span>Masters</span></div>
+            </a>
+            <p>CRM profesional para contratistas de HVAC, refrigeración y electricidad. Creado por contratistas, para contratistas.</p>
+        </div>
+        <div class="footer-col">
+            <h5>Producto</h5>
+            <a href="#features">Funciones</a>
+            <a href="#pricing">Precios</a>
+            <a href="#trinidad">La Trinidad</a>
+            <a href="https://acvolttech.github.io/trademaster-crm/">Iniciar Sesión</a>
+        </div>
+        <div class="footer-col">
+            <h5>Aprende</h5>
+            <a href="https://www.youtube.com/@nivel33" target="_blank">YouTube — Nivel 33</a>
+            <a href="#">Podcast Nivel 33</a>
+            <a href="#">Blog</a>
+        </div>
+        <div class="footer-col">
+            <h5>Contacto</h5>
+            <a href="#">info@trademastersusa.org</a>
+            <a href="#">San Bernardino, CA</a>
+            <a href="https://www.facebook.com/acvolttech" target="_blank">Facebook</a>
+            <a href="https://www.instagram.com/nivel33oficial" target="_blank">Instagram</a>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <span>© 2026 Trade Masters USA. Todos los derechos reservados.</span>
+        <div class="footer-social">
+            <a href="https://www.youtube.com/@nivel33" target="_blank">▶</a>
+            <a href="https://www.facebook.com/acvolttech" target="_blank">f</a>
+            <a href="https://www.instagram.com/nivel33oficial" target="_blank">📷</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Scroll reveal
+    var reveals = document.querySelectorAll('.reveal');
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    reveals.forEach(function(el) { observer.observe(el); });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            e.preventDefault();
+            var target = document.querySelector(this.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+</script>
+
+</body>
+</html>
